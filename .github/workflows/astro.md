@@ -53,8 +53,8 @@ Donde `<OWNER>` es el propietario del repositorio actual (consúltalo con `git r
 ## Resultado esperado
 
 Al finalizar, Astro habrá creado:
-- Una rama `feature/astro-scaffold`
-- Un Pull Request con todos los ficheros de estructura base
+- Una rama `feature/astro-scaffold` basada en `master`
+- Un Pull Request apuntando a `master` con todos los ficheros de estructura base
 - El PR incluye la descripción de cada fichero creado
 
 ## Uso
