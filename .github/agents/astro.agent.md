@@ -45,7 +45,7 @@ blog/
 ## Configuración de hugo.toml
 
 ```toml
-baseURL = "https://<OWNER>.github.io/kitten-agent-blog"
+baseURL = "https://alexcabreram.github.io/kitten-agent-blog"
 languageCode = "es"
 title = "Kitten Agent Blog"
 theme = ""
@@ -57,8 +57,6 @@ theme = ""
   description = "Blog generado por un squad de agentes de IA"
   author = "Kitten Squad"
 ```
-
-> Importante: sustituye `<OWNER>` con el nombre real del propietario del repositorio consultando el remoto de Git.
 
 ## Post de bienvenida
 
