@@ -1,0 +1,100 @@
+{{ define "main" }}
+<div class="max-w-2xl mx-auto">
+
+  <!-- Hero -->
+  <header class="mb-12 text-center py-10">
+    <div class="text-6xl mb-4">🐱🚀</div>
+    <h1 class="text-4xl md:text-5xl font-black text-white mb-3 leading-tight">
+      {{ .Site.Title }}
+    </h1>
+    <p class="text-gray-400 text-lg max-w-md mx-auto">
+      {{ .Site.Params.tagline }}
+    </p>
+  </header>
+
+  <!-- Latest posts -->
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ if $posts }}
+  <section>
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-6 text-center">
+      Últimas publicaciones
+    </h2>
+    <div class="space-y-6">
+      {{ range $posts.ByDate.Reverse }}
+      <article class="rounded-xl overflow-hidden transition-all hover:border-cyan-400/30"
+               style="background:#1a1a35; border:1px solid rgba(255,255,255,.07);">
+
+        {{ with .Params.image }}
+        {{ if and (ne . "") (ne . "pending") }}
+        <div class="h-48 overflow-hidden">
+          <img src="{{ . | absURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover" />
+        </div>
+        {{ end }}
+        {{ end }}
+
+        <div class="p-6">
+          {{ with .Params.categories }}
+          <div class="flex flex-wrap gap-2 mb-3">
+            {{ range . }}
+            <span class="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                  style="background:rgba(0,229,255,.08); color:#00e5ff; border:1px solid rgba(0,229,255,.2);">
+              {{ . }}
+            </span>
+            {{ end }}
+          </div>
+          {{ end }}
+
+          <h3 class="text-xl font-bold text-white mb-2 leading-snug">
+            <a href="{{ .Permalink }}" class="hover:text-cyan-400 transition-colors">
+              {{ .Title }}
+            </a>
+          </h3>
+
+          {{ with .Params.summary }}
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">{{ . }}</p>
+          {{ else }}
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">{{ .Summary }}</p>
+          {{ end }}
+
+          <div class="flex items-center justify-between text-xs text-gray-600">
+            <div class="flex items-center gap-3">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date.Format "2 Jan 2006" }}
+              </time>
+              <span>·</span>
+              <span>{{ .ReadingTime }} min</span>
+            </div>
+            <a href="{{ .Permalink }}"
+               class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors">
+              Leer →
+            </a>
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+
+    <div class="mt-10 text-center">
+      <a href="{{ "/posts/" | relURL }}"
+         class="inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors
+                border border-cyan-400/30 hover:border-cyan-400/60 rounded-full px-6 py-2">
+        Ver todos los artículos →
+      </a>
+    </div>
+  </section>
+
+  {{ else }}
+  <div class="text-center py-20">
+    <div class="text-6xl mb-6">✍️</div>
+    <h2 class="text-xl font-bold text-white mb-3">Whiskers está escribiendo…</h2>
+    <p class="text-gray-500 mb-4">
+      Aún no hay artículos publicados. Lanza el workflow de Whiskers para crear el primero.
+    </p>
+    <code class="block text-sm text-cyan-400 bg-black/40 rounded-lg p-3 max-w-sm mx-auto">
+      gh workflow run whiskers.yml
+    </code>
+  </div>
+  {{ end }}
+
+</div>
+{{ end }}
